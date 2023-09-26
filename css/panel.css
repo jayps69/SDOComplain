@@ -1,0 +1,360 @@
+:root {
+  --main-bg-color: #c14222;
+  --main-text-color: #009d63;
+  --second-text-color: #bbbec5;
+  --second-bg-color: lightblue;
+}
+
+.primary-text {
+  color: var(--main-text-color);
+}
+
+.second-text {
+  color: var(--second-text-color);
+}
+
+.primary-bg {
+  background-color: var(--main-bg-color);
+}
+
+.secondary-bg {
+  background-color: var(--second-bg-color);
+}
+
+.rounded-full {
+  border-radius: 100%;
+}
+#wrapper {
+  overflow-x: hidden;
+  
+  
+}
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin 0.25s ease-out;
+  -moz-transition: margin 0.25s ease-out;
+  -o-transition: margin 0.25s ease-out;
+  transition: margin 0.25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+ background-color: #0ef;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+#menu-toggle {
+  cursor: pointer;
+}
+
+.list-group-item {
+  border: none;
+  padding: 20px 30px;
+}
+
+.list-group-item.active {
+  background-color: transparent;
+  color: var(--main-text-color);
+  font-weight: bold;
+  border: none;
+}
+.charts {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 20px;
+  width: 100%;
+  padding: 20px;
+  padding-top: 0;
+  transition: width 0.25s ease-out;
+
+}
+
+.chart {
+ 
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  
+}
+.chart h2 {
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #666;
+    text-align: center
+}
+.doughnut{
+  max-width: 50%;
+  max-height: 50%;
+}
+#unbtn{
+  position: absolute;
+  width: 86px;
+  height: 40px;
+  left: 1326px;
+  top: 108px;
+  background-color: #28a745;
+  border-radius: 10px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 1;
+ }
+
+ .deleteBtn1{
+  background-color: darkblue;
+  color: white;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  width: 70px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+ }
+ #unbtn1{
+  position: absolute;
+  width: 86px;
+  height: 40px;
+  left: 1426px;
+  top: 108px;
+  background-color: #28a745;
+  border-radius: 10px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+  z-index: 1;
+ }
+ #unbtn:hover{
+  background-color: #3e704a;
+  box-shadow: 1px 1px gray, 1px 1px gray;
+  border-radius: 10px;
+  transition: .3s ease;
+}
+ #unbtn1:hover{
+  background-color: #c82333;
+  box-shadow: 1px 1px gray, 1px 1px gray;
+  border-radius: 10px;
+  transition: .3s ease; /* Darker red on hover */
+ }
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.modal-backdrop {
+  z-index: 999; /* Should be lower than modal z-index */
+  /* Other styles... */
+}
+
+.modal.show {
+  display: flex;
+  opacity: 1;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-dialog {
+  max-width: 500px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.modal-header {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 10px 10px 0 0;
+  padding: 15px;
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 24px;
+  margin: 0;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.modal-footer {
+  border-top: 1px solid #ddd;
+  padding: 10px 0;
+  text-align: right;
+}
+
+/* Close Button */
+.btn-close {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
+
+/* Close Button Hover Effect */
+.btn-close:hover {
+  color: #ff3333;
+}
+
+
+/* styles.css */
+
+/* Search bar container */
+/* Smaller search bar container */
+.search-bar {
+
+display: flex;
+align-items: center;
+margin: 20px 400px; /* Reduce the margin for spacing */
+padding: 3px; /* Reduce the padding */
+background-color: #f5f5f5;
+border-radius: 5px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+width: 600px; 
+}
+
+/* Smaller search input */
+#search {
+flex-grow: 0;
+width: 900px; 
+border: none;
+padding: 5px; /* Reduce the padding */
+font-size: 14px; /* Reduce the font size */
+outline: none;
+border-radius: 5px;
+}
+
+/* Smaller search button */
+#search-button {
+background-color: #007BFF;
+color: #fff;
+border: none;
+border-radius: 5px;
+padding: 5px 10px; /* Reduce the padding */
+margin-left: 10px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+#search-button:hover {
+background-color: #0056b3;
+}
+/* styles.css */
+
+
+
+
+/*table Section*/
+.table-container {
+  position: relative;
+  width: 100%;
+  height: 455px;
+  resize: both;
+  overflow: auto;
+  box-sizing: border-box;
+  box-shadow: 0 5px 25px #081b29;
+  border-radius: 5px;
+  background: white;
+  outline: 2px solid gray;
+  top: 15px;
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-container th,
+.table-container td {
+  padding: 8px;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  color: black;
+}
+
+.table-container thead th {
+  color: #ffffff;
+  background: #4FC3A1;
+  font-size: 12px;
+}
+
+
+.table-container thead th:nth-child(odd) {
+  color: #ffffff;
+  background: #324960;
+}
+
+.table-container tr:nth-child(even) {
+  background: #F8F8F8;
+}
+
+.table-container tr:hover {
+  background-color: #E0E0E0;
+}
+
+.table-container .delete {
+  float: right;
+  margin-bottom: 10px;
+}
+
+
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+  #wrapper.toggled .charts {
+      width: calc(100%  15rem);
+      
+    }
+  
+}

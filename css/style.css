@@ -1,0 +1,68 @@
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden; /* Hide overflow to prevent scrollbars */
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Set relative positioning for the body */
+    background-color: #0ef;
+}
+
+#banner {
+    position: absolute; /* Set absolute positioning for the banner section */
+    top: 10;
+    left: 10;
+    height: 90vh;
+    width: 90%;
+    background: url(../image/sdolog2.png); /* Use a relative path to the image */
+    background-size: 100% 100%;
+    background-position: center;
+    background-color: #0ef; /* Semi-transparent white background */
+    opacity: 0.28; /* Reduce the opacity of the background image (adjust as needed) */
+}
+
+.container {
+    position: relative; /* Set relative positioning for the container */
+    z-index: 1; /* Place the container above the #banner section */
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto; 
+    text-shadow: 0 0 5px black;
+    
+}.button-container {
+    text-align: center; /* Center-align the buttons horizontally */
+}
+.btn {
+    display: inline-block;
+    margin: 0 10px; /* Add some margin between the buttons (adjust as needed) */
+    width: 150px; /* Set the width as desired */
+    height: 40px; /* Set the height as desired */
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: #081b29; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove button border */
+    border-radius: 4px; /* Rounded corners */
+    box-shadow: 0 0 25px black;
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    text-align: center; /* Center-align the text */
+    text-decoration: none; /* Remove underlines from links (optional) */
+}
+
+/* Hover effect for the button */
+.btn:hover {
+    background-color: #0056b3; /* Change background color on hover */
+    color: #fff; /* Change text color on hover */
+}
+/* Rest of your styles for text and footer */
