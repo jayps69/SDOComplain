@@ -1,3 +1,6 @@
+<?php
+session_start()
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php ob_start()
@@ -28,11 +31,11 @@
                         class="fas fa-wrench me-2"></i>Manage Complaints</a>
                 <a href="../admin/adminCategory.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-tag me-2"></i>Add Category</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="../admin/adminSubCategory.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-folder-plus me-2"></i>Add Sub Category</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="../admin/addschool.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-school me-2"></i>Add School</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="../admin/adminSource.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-plus me-2"></i>Add Source</a>
                 <a href="../admin/adminManageUser.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="fas fa-user-times me-2"></i>Manage Account</a>
@@ -58,7 +61,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user me-2"></i>ADMIN
+                                <i class="fas fa-user me-2"></i><?php echo $_SESSION['admin_name']; ?>
                                                   </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
@@ -69,12 +72,13 @@
                     </ul>
                 </div>
             </nav>
+            <form method="POST" enctype="multipart/form-data">
             <div class="search-bar">
-                <input type="text" id="search" placeholder="Search...">
-                <button id="search-button"><i class="fas fa-search"></i></button>   
+                <input type="text" id="search" placeholder="Search..."name="txtsearch">
+                <button type="submit " name="search" id="search-button"><i class="fas fa-search"></i></button>   
             </div>
             <button type="button" id="unbtn" class="unbtn" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i class="fas fa-plus"></i> Add</button>
-            <button id="unbtn1" class="unbtn1"><i class="fas fa-trash-alt"></i> Delete</button>
+            <button type="submit" id="unbtn1" class="unbtn1" name="delete" value="Delete" onclick="return confirm('ARE YOU SURE YOU WANT TO Delete THIS ITEM/S!')"><i class="fas fa-trash-alt"></i> Delete</button>
 
             <div class="container-fluid px-4">
             <div class="table-container">
@@ -104,14 +108,19 @@
                         if ($conn->connect_error) {
                             die("Connection failed: " . $conn->connect_error);
                         }
-
+                        $search = isset($_POST['search']) ? $_POST['txtsearch'] : '';
                         $sql = "SELECT * FROM users";
+                        if (!empty($search)) {
+                            $sql .= " WHERE CONCAT(admin_idnum, admin_name, user_username, user_email, admin_contact, admin_role) LIKE '%$search%'";
+
+                        }
 
                         $result = $conn->query($sql); // Execute the SQL query
 
                         // Display data in HTML table
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
+                               
                                 $admin_idnum = $row['admin_idnum'];
                                 $admin_name = $row["admin_name"];
                                 $user_username = $row["user_username"];
@@ -147,9 +156,33 @@
                     
                     <!-- Add more rows and data as needed -->
                 </tbody>
-            </table>
+            </table><?php
+                // ...your existing PHP code...
+                $conn = new mysqli('localhost', 'root', '', 'sdocms');
+
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+
+                if (isset($_POST['delete'])) {
+                    $selectedIds = $_POST['check']; // Retrieve the selected checkbox values
+
+                    foreach ($selectedIds as $id) {
+                        // Perform the delete operation for each ID
+                        $deleteQuery = "DELETE FROM users WHERE id = '$id'";
+                        $result = mysqli_query($conn, $deleteQuery);
+                    }
+
+                    // Redirect to the current page to update the table after deletion
+                    header("Location: {$_SERVER['REQUEST_URI']}");
+                    exit();
+                }
+
+                // ...your existing PHP code...
+            ?>
             
             </div>
+            </form>
             <form method="POST" enctype="multipart/form-data">
                 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
                     <div class="modal-dialog">
