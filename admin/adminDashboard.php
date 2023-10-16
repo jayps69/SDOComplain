@@ -27,11 +27,11 @@ session_start();
                         class="fas fa-wrench me-2"></i>Manage Complaints</a>
                 <a href="../admin/adminCategory.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-tag me-2"></i>Add Category</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="../admin/adminSubCategory.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-folder-plus me-2"></i>Add Sub Category</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="../admin/addschool.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-school me-2"></i>Add School</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                <a href="../admin/adminSource.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-plus me-2"></i>Add Source</a>
                 <a href="../admin/adminManageUser.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-user-times me-2"></i>Manage Account</a>
@@ -60,7 +60,7 @@ session_start();
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user me-2"></i>ADMIN
+                                <i class="fas fa-user me-2"></i><?php echo $_SESSION['admin_name']; ?>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
@@ -79,9 +79,9 @@ session_start();
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
                                 <h3 class="fs-2">3720</h3>
-                                <p class="fs-5">Processing</p>
+                                <p class="fs-5">Refered</p>
                             </div>
-                            <i  class="fas fa-spinner fa-spin fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                            <i class="fas fa-arrow-circle-right fa-2x fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
                     </div>
 
@@ -89,9 +89,9 @@ session_start();
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
                                 <h3 class="fs-2">49</h3>
-                                <p class="fs-5">Recieved</p>
+                                <p class="fs-5">Replied</p>
                             </div>
-                            <i  class="fas fa-check fa-2x fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                            <i  class="fas fa-comment fa-2x fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
                     </div>
 
@@ -99,18 +99,18 @@ session_start();
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
                                 <h3 class="fs-2">38</h3>
-                                <p class="fs-5">Picked</p>
+                                <p class="fs-5">Pending</p>
                             </div>
-                            <i class="fas fa-hand-paper fa-2x fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                            <i class="fas fa-hourglass-half fa-2x fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
                     </div> 
                     <div class="col-md-3">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
                                 <h3 class="fs-2">38</h3>
-                                <p class="fs-5">Accomplished</p>
+                                <p class="fs-5">Resolved</p>
                             </div>
-                            <i class="fas fa-trophy fa-2x fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                            <i class="fas fa-check-circle fa-2x fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
                     </div> 
                 </div>
