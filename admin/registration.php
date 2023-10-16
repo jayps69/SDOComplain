@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - codingnepalweb.com -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,84 +24,153 @@
         </div>
     
 
-        <form action="#">
+        <form action="#" method="POST">
             <div class="form first">
                 <div class="details personal">
                     <span class="title">Complainant Personal Details</span>
 
                     <div class="fields">
                         <div class="input-field">
-                            <label>Complainant Fullname</label>
-                            <input type="text" placeholder="Enter your name" required>
+                            <label>DTS Number</label>
+                            <input type="number" name="dts" placeholder="Enter DTS Number" >
                         </div>
 
                         <div class="input-field">
-                            <label>Date of Birth</label>
-                            <input type="date" placeholder="Enter birth date" required>
+                            <label>Complainant Full Name</label>
+                            <input type="text"name="fname" placeholder="Enter Full Name" >
                         </div>
 
                         <div class="input-field">
                             <label>Email</label>
-                            <input type="text" placeholder="Enter your email" required>
+                            <input type="mail" name="mail" placeholder="Enter Email" >
                         </div>
 
                         <div class="input-field">
                             <label>Mobile Number</label>
-                            <input type="number" placeholder="Enter mobile number" required>
+                            <input type="number" name="contact" placeholder="Enter Mobile Number" >
                         </div>
 
-                        <div class="input-field">
-                            <label>Gender</label>
-                            <select required>
-                                <option disabled selected>Select gender</option>
-                                <option>Male</option>
-                                <option>Female</option>
-                                <option>Others</option>
-                            </select>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Age</label>
-                            <input type="number" placeholder="Enter your age" required>
-                        </div>
+                        
                     </div>
                 </div>
 
                 <div class="details ID">
-                    <span class="title">Complains Details</span>
+                    <span class="title">Complains Information Details</span>
 
                     <div class="fields">
                         <div class="input-field">
-                            <label>Nature of the Complaint</label>
-                            <input type="text" placeholder="Enter Nature of the Complaint" required>
+                            <label>Ticket Reference Number</label>
+                            <input type="number" name="trn" placeholder="Enter Ticket Reference Number" >
                         </div>
 
                         <div class="input-field">
-                            <label>Locahon Happened</label>
-                            <input type="text" placeholder="Enter Locahon Happened" required>
+                            <label for="category-dropdown">Category</label>
+                            <select id="category-dropdown" name="category">
+                                <option value="">-------Select Category-------</option>
+                                <?php
+                                $conn = new mysqli('localhost', 'root', '', 'sdocms');
+                                if ($conn->connect_error) {
+                                    die("Connection failed: " . $conn->connect_error);
+                                }
+
+                                $result = mysqli_query($conn, "SELECT * FROM category ORDER BY category ASC");
+
+                                while ($row = mysqli_fetch_array($result)) {
+                                    ?>
+                                    <option value="<?php echo $row['catID']; ?>"><?php echo $row['category']; ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="input-field">
+                            <label for="subcategory-dropdown">Sub Category</label>
+                            <select name="subcategory" id="subcategory-dropdown">
+                                <option value="">-------Select Sub Category-------</option>
+                            </select>
+                        </div>
+                        <script>
+                        document.getElementById('category-dropdown').addEventListener('change', function() {
+                            var categoryID = this.value;
+                            var subcategoryDropdown = document.getElementById('subcategory-dropdown');
+                            subcategoryDropdown.innerHTML = '<option value="">-------Select Sub Category-------</option>';
+
+                            if (categoryID) {
+                                // Fetch subcategories based on the selected category from the server using AJAX.
+                                // You can use JavaScript frameworks like jQuery or fetch API for this.
+                                // Replace the following with your AJAX code.
+
+                                // Example using fetch API
+                                fetch('get_subcategories.php?categoryID=' + categoryID)
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        data.forEach(function(subcategory) {
+                                            var option = document.createElement('option');
+                                            option.value = sub_category.id;
+                                            option.text = sub_category.subcategory;
+                                            subcategoryDropdown.appendChild(option);
+                                        });
+                                    })
+                                    .catch(error => console.error('Error fetching subcategories: ' + error));
+                            } else {
+                                // If no category is selected, keep the subcategory dropdown empty.
+                            }
+                        });
+                        </script>
+
+                        
+                         <div class="input-field">
+                            <label for="source-dropdown"?>Source</label>
+                            <select id="source-dropdown" name="source">
+                                <option value="">-------Select Source-------</option>
+                                <?php
+                                $conn = new mysqli('localhost', 'root', '', 'sdocms');
+
+                                        if ($conn->connect_error) {
+                                            die("Connection failed: " . $conn->connect_error);
+                                        }
+
+                                        $result = mysqli_query($conn, "SELECT * FROM source ORDER BY source ASC"); // Added a semicolon here
+
+                                        while ($row = mysqli_fetch_array($result)) {
+                                            ?>
+                                            <option value="<?php echo $row['id']; ?>"><?php echo $row['source']; ?></option>
+                                            <?php
+                                        }
+
+                                // Don't forget to close the PHP tag if you don't have additional PHP code below.
+                                ?>
+                            </select>
                         </div>
 
                         <div class="input-field">
-                            <label>Date Happened</label>
-                            <input type="date" placeholder="Enter Date Happened" required>
-                        </div>
+                            <label for="school-dropdown">School</label>
+                            <select id="school-dropdown" name="school">
+                                <option value="">-------Select School-------</option>
+                                <?php
+                                $conn = new mysqli('localhost', 'root', '', 'sdocms');
 
-                        <div class="input-field">
-                            <label>Time Happened</label>
-                            <input type="time" placeholder="Enter Time Happened" required>
-                        </div>
+                                        if ($conn->connect_error) {
+                                            die("Connection failed: " . $conn->connect_error);
+                                        }
 
-                        <div class="input-field">
-                            <label>Supporting Evidence/Documents</label>
-                            <input type="file" placeholder="Attach Supporting Evidence/Documents" required>
-                        </div>
+                                        $result = mysqli_query($conn, "SELECT * FROM school ORDER BY school ASC"); // Added a semicolon here
 
-                        <div class="input-field">
-                            <label>Relationship to the school</label>
-                            <input type="text" placeholder="Enter Relationship to the School" required>
+                                        while ($row = mysqli_fetch_array($result)) {
+                                            ?>
+                                            <option value="<?php echo $row['id']; ?>"><?php echo $row['school']; ?></option>
+                                            <?php
+                                        }
+
+                                // Don't forget to close the PHP tag if you don't have additional PHP code below.
+                                ?>
+                            </select>
                         </div>
-                    </div>
-                    
+                        <div class="input-field">
+                            <label>Date Recieved</label>
+                            <input type="date" name="daterecieved" placeholder="Enter Date Recieved" >
+                        </div>
+                    </div>                   
                     <button class="nextBtn">
                         <span class="btnText">Next</span>
                         <i class="uil uil-navigator"></i>
@@ -112,87 +180,21 @@
 
             <div class="form second">
                 <div class="details address">
-                    <span class="title">Complaint Category</span>
+                    <span class="title">Complaint Report Details</span>
 
                     <div class="fields">
                         <div class="input-field">
-                            <label>Category</label>
-                            <input type="text" placeholder="Enter Category" required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Sub Category</label>
-                            <input type="text" placeholder="Enter Sub Category" required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Person of Interest</label>
-                            <input type="text" placeholder="Enter Person of Interest" required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>School</label>
-                            <input type="text" placeholder="Enter your School" required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>School Location</label>
-                            <input type="text" placeholder="Enter School Location" required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Urgency Type</label>
-                            <select required>
-                                <option disabled selected>Select Urgency Type</option>
-                                <option>Low</option>
-                                <option>Medium</option>
-                                <option>High</option>
-                            </select>
-                    </div>
-                </div>
-
-                <div class="details family">
-                    <span class="title">Witness Information</span>
-
-                    <div class="fields">
-                        <div class="input-field">
-                            <label>Name of Witness</label>
-                            <input type="text" placeholder="Enter Name of Witness " required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Age of Witness</label>
-                            <input type="number" placeholder="Enter Witness Age" required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Relationship to Complainant</label>
-                            <input type="text" placeholder="Enter Relationship to Complainant" required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Witness Contact</label>
-                            <input type="text" placeholder="Enter Witness Contact" required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Witness email</label>
-                            <input type="email" placeholder="Enter Witness email" required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Sworn letter of the Witness</label>
-                            <input type="file" placeholder="Sworn letter of the Witness" required>
+                            <label>Details</label>
+                            <textarea placeholder="Enter Details" name="details" required style="width: 840px; height: 335px; padding:10px;"></textarea>
                         </div>
                     </div>
-
                     <div class="buttons">
                         <div class="backBtn">
                             <i class="uil uil-navigator"></i>
                             <span class="btnText">Back</span>
                         </div>
                         
-                        <button class="sumbit">
+                        <button type="submit" name="submit" class="sumbit">
                             <span class="btnText">Submit</span>
                             <i class="uil uil-navigator"></i>
                         </button>
@@ -201,7 +203,30 @@
             </div>
         </form>
     </div>
+    <?php
+     /*if (isset($_POST['submit'])) {
 
+
+        $db = mysqli_connect('localhost', 'root', '', 'sdocms') or die("Connection failed: " . mysqli_connect_error());
+
+        $dts = $_POST["dts"];
+        $fname = $_POST["fname"];
+        $mail = $_POST["mail"];
+        $contact = $_POST["contact"];
+        $ticketRefNumber = $_POST["trn"];
+        $category = $_POST["category"];
+        $subcategory = $_POST["subcategory"];
+        $source = $_POST["source"];
+        $school = $_POST["school"];
+        $dateReceived = $_POST["daterecieved"];
+        $details = $_POST["details"];
+
+       
+        $sql = "INSERT INTO complaint (dts, name, email, contact, trn, category, subcategory, source, school, recieved, details) 
+        VALUES ('$dts', '$fname', ' $mail' , ' $contact', ' $ticketRefNumber', ' $category', ' $subcategory', ' $source', ' $school', ' $dateRecieved', ' $details')";
+     }*/
+    ?>
+    
     <script src="../js/regisscript.js"></script>
     <script>
         // Function to close the current tab/window and redirect
